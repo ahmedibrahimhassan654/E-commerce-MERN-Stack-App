@@ -14,7 +14,7 @@
 
 
 
-    
+
     //@desc     Get All  Product Category
     //@route    get /api/v1/productcategory
     //@access   private,puplic
@@ -40,7 +40,7 @@
     //@access   private
     exports.updateProductCategory = (req, res, next) =>
     {
-            res.status(200).json({ success: true, msg: `category with id ${req.params.id} is created ` });
+            res.status(200).json({ success: true, msg: `category with id ${req.params.id} is updated ` });
 
     };
 

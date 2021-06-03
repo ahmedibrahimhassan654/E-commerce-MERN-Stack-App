@@ -1,6 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
-
+const morgan =require('morgan')
 
 //routefiles
 const productcategory= require('./routes/productcategory')
@@ -10,6 +10,13 @@ dotenv.config({ path: './config/config.env' })
 
 
 const app = express()
+
+
+//morgane (div loogin)middele ware 
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
 
 //mount routes
