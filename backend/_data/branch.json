@@ -1,0 +1,54 @@
+[
+	{
+		"_id": "5d713995b721c3bb38c1f5d1",
+		"name": "Branch 1",
+		"description": "Branch 1 description",
+		"email": "test@gmail.com",
+		"phone": "002 01065619208",
+		"address": "elobour city ,building 423 flat 13 ,elqlubia,egypt",
+		"city": "Elobour city",
+		"state": "elqlubia",
+		"zipcode": "11828",
+		"country": "Egypt",
+		"trAvailable": "Yes"
+	},
+	{
+		"_id": "5d713995b721c3bb38c1f5d2",
+		"name": "Branch 2",
+		"description": "Branch 2 description",
+		"email": "test2@gmail.com",
+		"phone": "002 01065619208",
+		"address": "elobour city ,building 423 flat 13 ,elqlubia,egypt",
+		"city": "Elobour city",
+		"state": "elqlubia",
+		"zipcode": "11828",
+		"country": "Egypt",
+		"trAvailable": "No"
+	},
+	{
+		"_id": "5d713995b721c3bb38c1f5d3",
+		"name": "Branch 3",
+		"description": "Branch 3 description",
+		"email": "test3@gmail.com",
+		"phone": "002 01065619208",
+		"address": "elobour city ,building 423 flat 13 ,elqlubia,egypt",
+		"city": "Elobour city",
+		"state": "elqlubia",
+		"zipcode": "11828",
+		"country": "Egypt",
+		"trAvailable": "No"
+	},
+	{
+		"_id": "5d713995b721c3bb38c1f5d4",
+		"name": "Branch 4",
+		"description": "Branch 4 description",
+		"email": "test3@gmail.com",
+		"phone": "002 01065619208",
+		"address": "elobour city ,building 423 flat 13 ,elqlubia,egypt",
+		"city": "Elobour city",
+		"state": "elqlubia",
+		"zipcode": "11828",
+		"country": "Egypt",
+		"trAvailable": "Yes"
+	}
+]

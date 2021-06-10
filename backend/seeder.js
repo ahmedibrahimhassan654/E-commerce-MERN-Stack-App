@@ -8,6 +8,7 @@ dotenv.config({ path: './config/config.env' });
 
 // Load models
 const ProductCategory = require('./models/ProductCategory');
+const Branch=require('./models/Branch')
 
 
 // Connect to DB
@@ -23,13 +24,17 @@ const ProductCategories = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/product category.json`, 'utf-8')
 );
 
+const Branches = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/branch.json`, 'utf-8')
+);
+
 
 
 // Import into DB
 const importData = async () => {
   try {
     await ProductCategory.create(ProductCategories);
-    // await Course.create(courses);
+     await Branch.create(Branches);
     // await User.create(users);
     // await Review.create(reviews);
     console.log('Data Imported...'.green.inverse);
@@ -43,7 +48,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await ProductCategory.deleteMany();
-    // await Course.deleteMany();
+     await Branch.deleteMany();
     // await User.deleteMany();
     // await Review.deleteMany();
     console.log('Data Destroyed...'.red.inverse);
