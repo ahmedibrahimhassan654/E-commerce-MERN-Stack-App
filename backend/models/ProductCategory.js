@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { transliterate, slugify } = require('transliteration');
-
+ const { transliterate, slugify } = require('transliteration');
+//const slugify= require('slugify')
 const productCategorySchema = new mongoose.Schema(
 	{
 		name: {
@@ -26,6 +26,14 @@ const productCategorySchema = new mongoose.Schema(
 	},
 	{ timestamps: true }
 );
+
+//create category slug from name 
+productCategorySchema.pre('save',function (next) {
+	this.slug=slugify(this.name,{lower:true})
+	next()
+})
+
+
 
 
 

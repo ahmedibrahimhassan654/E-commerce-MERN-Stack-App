@@ -1,12 +1,15 @@
 const ProductCategory=require('../models/ProductCategory')
-   
-   
+ 
+const ErrorResponse = require('../utils/errorResponse');   
+
+const asyncHandler=require('../midelware/async')
+
    //@desc     create  Product Category
     //@route    Post /api/v1/productcategory
     //@access   private
 
 
-    exports.createProductCategory =async (req, res, next) =>
+    exports.createProductCategory =asyncHandler( async (req, res, next) =>
     {
         try {
             const category = await ProductCategory.create(req.body);
@@ -17,17 +20,14 @@ const ProductCategory=require('../models/ProductCategory')
 			});
 
         } catch (err) {
-            res.status(400).json({
-                success: false
-                
-            })
+            next(err)
         }
         
 
 
 
         
-    }
+    })
 
 
 
@@ -38,9 +38,9 @@ const ProductCategory=require('../models/ProductCategory')
     //@desc     Get All  Product Category
     //@route    get /api/v1/productcategory
     //@access   private,puplic
-exports.getAllProductCategory = async (req, res, next) =>
+exports.getAllProductCategory =asyncHandler( async (req, res, next) =>
 {
-        try {
+    
             
             const allCategory = await ProductCategory.find()
      
@@ -51,14 +51,8 @@ exports.getAllProductCategory = async (req, res, next) =>
 				data: allCategory,
 			});
 
-        } catch (err) {
-            res.staus(400).json(
-                {
-                    success: false,
-                }
-            )
-        }
-    };
+     
+    });
 
 
 
@@ -66,15 +60,14 @@ exports.getAllProductCategory = async (req, res, next) =>
     //@desc     Get Single  Product Category
     //@route    get /api/v1/productcategory/:id
     //@access   private,puplic
-exports.getSingleProductCategory = async (req, res, next) =>
+exports.getSingleProductCategory =asyncHandler( async (req, res, next) =>
     
 {
     try {
         const category = await ProductCategory.findById(req.params.id)
         if (!category) {
-            return res.status(400).json({
-                success: false
-            })
+            return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
+
         }
         
         res.status(200).json({
@@ -82,20 +75,19 @@ exports.getSingleProductCategory = async (req, res, next) =>
             msg: `show  product category with id ${req.params.id}`,
             data:category
         });
-    } catch (error) {
-        res.status(400).json({
-            success:false
-        })
+    } catch (err) {
+       
+        next(err);
     }
         
-    };
+    });
 
 
 
     //@desc     update Product Category
     //@route    put /api/v1/productcategory/:id
     //@access   private
-exports.updateProductCategory =async (req, res, next) =>
+exports.updateProductCategory =asyncHandler( async (req, res, next) =>
     
 {
 
@@ -105,9 +97,8 @@ exports.updateProductCategory =async (req, res, next) =>
 			runValidators: true,
 		});
 		if (!category) {
-			return res.status(400).json({
-				success: false,
-			});
+			 return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
+
 		}
         res.status(200).json({
 			success: true,
@@ -115,27 +106,24 @@ exports.updateProductCategory =async (req, res, next) =>
 			data: category,
 		});
     } catch (err) {
-        console.log(err);
-          res.status(400).json({
-				success: false,
-			});
+   
+          next(err)
     }
     
 
-    };
+    });
 
 
     //@desc     delete Product Category
     //@route    delete /api/v1/productcategory/:id
     //@access   private
-    exports.deleteProductCategory = async (req, res, next) =>
+    exports.deleteProductCategory = asyncHandler( async (req, res, next) =>
     {
             try {
 				const category = await ProductCategory.findByIdAndDelete(req.params.id);
 				if (!category) {
-					return res.status(400).json({
-						success: false,
-					});
+					return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
+
 				}
 				res.status(200).json({
 					success: true,
@@ -143,11 +131,9 @@ exports.updateProductCategory =async (req, res, next) =>
 					
 				});
 			} catch (err) {
-				console.log(err);
-				res.status(400).json({
-					success: false,
-				});
+			 next(err)
 			}
+
             
 
-    };
+    });

@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const colors=require('colors')
-
+const ErrorHandler=require('./midelware/error')
 const connectDb=require('./config/db')
 
 
@@ -39,7 +39,7 @@ app.use('/api/v1/productcategory', productcategory);
 
 
 
-
+app.use(ErrorHandler)
 
 const PORT = process.env.PORT || 5000
 
