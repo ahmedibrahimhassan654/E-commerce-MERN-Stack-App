@@ -13,7 +13,7 @@ exports.createBranch = asyncHandler(async (req, res, next) => {
 		const branch = await Branch.create(req.body);
 		res.status(200).json({
 			success: true,
-			msg: ` new category created`,
+			msg: ` new branch created`,
 			data: branch,
 		});
 	} catch (err) {
@@ -47,7 +47,7 @@ exports.getSingleBranch = asyncHandler(async (req, res, next) => {
 
 		res.status(200).json({
 			success: true,
-			msg: `show  product category with id ${req.params.id}`,
+			msg: `show  branch with id ${req.params.id}`,
 			data: branch,
 		});
 	} catch (err) {
@@ -65,7 +65,7 @@ exports.updateBranch = asyncHandler(async (req, res, next) => {
 			runValidators: true,
 		});
 		if (!branch) {
-			return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
+			return next(new ErrorResponse(`branch with id ${req.params.id} is not found`, 404));
 		}
 		res.status(200).json({
 			success: true,
@@ -88,7 +88,7 @@ exports.deleteBranch = asyncHandler(async (req, res, next) => {
 		}
 		res.status(200).json({
 			success: true,
-			msg: `category with id ${req.params.id} is Deleted `,
+			msg: `branch with id ${req.params.id} is Deleted `,
 		});
 	} catch (err) {
 		next(err);
