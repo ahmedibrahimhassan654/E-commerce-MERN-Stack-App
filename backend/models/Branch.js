@@ -21,7 +21,6 @@ const BranchSchema = new mongoose.Schema(
 
 		description: {
 			type: String,
-
 			trim: true,
 			maxlength: [500, 'name can not be more than 500 characters'],
 		},
@@ -45,9 +44,6 @@ const BranchSchema = new mongoose.Schema(
         state: String,
         zipcode: String,
         country: String,
-
-      
-	
 		images: {
 			type: Array,
 		},

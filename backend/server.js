@@ -20,6 +20,7 @@ connectDb()
 //routefiles
 const productcategory = require('./routes/productcategory')
 const branch=require('./routes/branch')
+const sub = require('./routes/subProduct')
 
 const app = express()
 
@@ -38,6 +39,7 @@ if (process.env.NODE_ENV === 'development') {
 //mount routes
 app.use('/api/v1/productcategory', productcategory);
 app.use('/api/v1/branch', branch);
+app.use('/api/v1/sub',sub)
 
 
 
