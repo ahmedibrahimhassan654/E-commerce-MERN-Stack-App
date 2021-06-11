@@ -11,7 +11,7 @@ const asyncHandler=require('../midelware/async')
 
     exports.createProductCategory =asyncHandler( async (req, res, next) =>
     {
-        try {
+      
             const category = await ProductCategory.create(req.body);
             res.status(200).json({
 				success: true,
@@ -19,9 +19,7 @@ const asyncHandler=require('../midelware/async')
 				data: category,
 			});
 
-        } catch (err) {
-            next(err)
-        }
+      
         
 
 
@@ -63,8 +61,13 @@ exports.getAllProductCategory =asyncHandler( async (req, res, next) =>
 exports.getSingleProductCategory =asyncHandler( async (req, res, next) =>
     
 {
-    try {
-        const category = await ProductCategory.findById(req.params.id)
+   
+    const category = await ProductCategory.findById(req.params.id).populate(
+        {
+            path: 'subCategory',
+            select: 'name description',
+        }
+        )
         if (!category) {
             return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
 
@@ -75,10 +78,7 @@ exports.getSingleProductCategory =asyncHandler( async (req, res, next) =>
             msg: `show  product category with id ${req.params.id}`,
             data:category
         });
-    } catch (err) {
-       
-        next(err);
-    }
+
         
     });
 
@@ -91,7 +91,7 @@ exports.updateProductCategory =asyncHandler( async (req, res, next) =>
     
 {
 
-    try {
+  
         const category = await ProductCategory.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
 			runValidators: true,
@@ -105,10 +105,7 @@ exports.updateProductCategory =asyncHandler( async (req, res, next) =>
 			msg: `category with id ${req.params.id} is updated `,
 			data: category,
 		});
-    } catch (err) {
-   
-          next(err)
-    }
+
     
 
     });
@@ -119,7 +116,7 @@ exports.updateProductCategory =asyncHandler( async (req, res, next) =>
     //@access   private
     exports.deleteProductCategory = asyncHandler( async (req, res, next) =>
     {
-            try {
+          
 				const category = await ProductCategory.findById(req.params.id);
 				if (!category) {
 					return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
@@ -131,9 +128,7 @@ exports.updateProductCategory =asyncHandler( async (req, res, next) =>
 					msg: `category with id ${req.params.id} is Deleted `,
 					
 				});
-			} catch (err) {
-			 next(err)
-			}
+		
 
             
 
