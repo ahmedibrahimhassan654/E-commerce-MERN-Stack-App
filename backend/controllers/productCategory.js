@@ -42,7 +42,7 @@ exports.getAllProductCategory =asyncHandler( async (req, res, next) =>
 {
     
             
-            const allCategory = await ProductCategory.find()
+            const allCategory = await ProductCategory.find().populate('subCategory');
      
             res.status(200).json({
 				count: allCategory.length,
