@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
- const { transliterate, slugify } = require('transliteration');
+const { transliterate, slugify } = require('transliteration');
 //const slugify= require('slugify')
 const productCategorySchema = new mongoose.Schema(
 	{
@@ -21,20 +21,35 @@ const productCategorySchema = new mongoose.Schema(
 		slug: {
 			type: String,
 			index: true,
-        },
-     
+		},
 	},
-	{ timestamps: true }
+	{
+		toJSON: {
+			virtuals: true,
+		},
+		toObject: {
+			virtuals: true,
+		},
+	},
+	{
+		timestamps: true,
+	}
 );
 
-//create category slug from name 
-productCategorySchema.pre('save',function (next) {
-	this.slug=slugify(this.name,{lower:true})
-	next()
-})
+//create category slug from name
+productCategorySchema.pre('save', function (next) {
+	this.slug = slugify(this.name, { lower: true });
+	next();
+});
 
+//Cascade Delete sub category when product category is deleted
 
-
-
+//reverse populte with virtuals with sub ctaegory
+productCategorySchema.virtual('subCategory', {
+	ref: 'ProductSub',
+	localField: '_id',
+	foreignField: 'parent',
+	justOne: false,
+});
 
 module.exports = mongoose.model('ProductCategory', productCategorySchema);
