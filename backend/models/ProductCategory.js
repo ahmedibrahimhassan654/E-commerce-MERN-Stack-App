@@ -43,6 +43,13 @@ productCategorySchema.pre('save', function (next) {
 });
 
 //Cascade Delete sub category when product category is deleted
+productCategorySchema.pre('remove',async function (next) {
+	await this.model('ProductSub').deleteMany({ parent: this._id });
+	console.log(`sub category is removed from category ${this._id}`);
+	next()
+})
+
+
 
 //reverse populte with virtuals with sub ctaegory
 productCategorySchema.virtual('subCategory', {

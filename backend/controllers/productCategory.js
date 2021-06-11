@@ -120,11 +120,12 @@ exports.updateProductCategory =asyncHandler( async (req, res, next) =>
     exports.deleteProductCategory = asyncHandler( async (req, res, next) =>
     {
             try {
-				const category = await ProductCategory.findByIdAndDelete(req.params.id);
+				const category = await ProductCategory.findById(req.params.id);
 				if (!category) {
 					return next(new ErrorResponse(`product category with id ${req.params.id} is not found`, 404));
 
-				}
+                }
+                category.remove()
 				res.status(200).json({
 					success: true,
 					msg: `category with id ${req.params.id} is Deleted `,
