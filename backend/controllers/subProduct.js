@@ -111,6 +111,8 @@ exports.deleteSub = asyncHandler(async (req, res, next) => {
 			success: true,
             msg: `Sub-category with id ${req.params.id} is Deleted `,
             data:{}
+
+			
 		});
 
 });
