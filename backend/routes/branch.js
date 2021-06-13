@@ -9,8 +9,11 @@ const {
 } = require('../controllers/branch');
 const router = express.Router();
 
-router.route('/').get(getAllBranches).post(createBranch);
+const { protect } = require('../midelware/auth');
 
-router.route('/:id').get(getSingleBranch).put(updateBranch).delete(deleteBranch);
+
+router.route('/').get(getAllBranches).post(protect, createBranch);
+
+router.route('/:id').get(getSingleBranch).put(protect, updateBranch).delete(protect,deleteBranch);
 
 module.exports = router;
