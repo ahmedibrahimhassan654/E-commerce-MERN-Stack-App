@@ -53,7 +53,11 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('wrong password', 401));
   }
 
-  sendTokenResponse(user, 200, res);
+  const token=user.getSignedJwtToken()
+   res.status(200).json({
+		message: 'success',
+		token,
+   });
 });
 
 // @desc      Log user out / clear cookie
