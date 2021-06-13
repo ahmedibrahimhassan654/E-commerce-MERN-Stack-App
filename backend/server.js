@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const colors=require('colors')
 const ErrorHandler=require('./midelware/error')
 const connectDb=require('./config/db')
-
+const cookieParser = require('cookie-parser');
 
 
 
@@ -28,8 +28,8 @@ const app = express()
 //Body Parser
 app.use(express.json());
 
-
-
+//cookie-parser
+app.use(cookieParser());
 //morgane (div loogin)middele ware 
 
 if (process.env.NODE_ENV === 'development') {

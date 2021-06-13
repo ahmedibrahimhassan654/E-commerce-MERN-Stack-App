@@ -19,13 +19,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     role
   });
 //create token 
- const token=user.getSignedJwtToken()
-
-  res.status(200).json({
-    message: 'success',
-    data: user,
-    token
-  })
+sendTokenResponse(user,200,res)
 });
 
 // @desc      Login user
@@ -53,11 +47,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('wrong password', 401));
   }
 
-  const token=user.getSignedJwtToken()
-   res.status(200).json({
-		message: 'success',
-		token,
-   });
+sendTokenResponse(user, 200, res);
 });
 
 // @desc      Log user out / clear cookie
